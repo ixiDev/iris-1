@@ -1,0 +1,560 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>C API &mdash; IRIS  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Citation" href="misc.html" />
+    <link rel="prev" title="Platform Model" href="architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> IRIS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">From Source</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#docker">Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html#pypi">PyPI</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="started.html">Hello World</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IRIS Architecture</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">Platform Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html#memory-model">Memory Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html#programming-model">Programming Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html#execution-model">Execution Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html#task">Task</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">IRIS API Specification</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">C API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#cpp-api">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#fortran-api">Fortran API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#python-api">Python API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Miscellaneous</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="misc.html">Citation</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IRIS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>C API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="c-api">
+<span id="id1"></span><h1>C API<a class="headerlink" href="#c-api" title="Permalink to this headline">¶</a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.IRIS_MAX_NPLATFORMS">
+<span class="target" id="iris__runtime_8h_1a8d5cbc711f5ae7b988072dfa4d7c27ac"></span><span class="sig-name descname"><span class="n"><span class="pre">IRIS_MAX_NPLATFORMS</span></span></span><a class="headerlink" href="#c.IRIS_MAX_NPLATFORMS" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.IRIS_MAX_NDEVS">
+<span class="target" id="iris__runtime_8h_1a0cbab136df4d55b7a73fef36dcb815bd"></span><span class="sig-name descname"><span class="n"><span class="pre">IRIS_MAX_NDEVS</span></span></span><a class="headerlink" href="#c.IRIS_MAX_NDEVS" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_default">
+<span class="target" id="iris__runtime_8h_1ab62492361db83bebbeb12fcc7e2abdbc"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_default</span></span></span><a class="headerlink" href="#c.iris_default" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_cpu">
+<span class="target" id="iris__runtime_8h_1af43141ccd31cd996d6666346867af4b3"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_cpu</span></span></span><a class="headerlink" href="#c.iris_cpu" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_gpu">
+<span class="target" id="iris__runtime_8h_1a8821a6f8dea72510823b65f124213200"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_gpu</span></span></span><a class="headerlink" href="#c.iris_gpu" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_fpga">
+<span class="target" id="iris__runtime_8h_1a9315bf728b9e4b419b98c651e573730e"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_fpga</span></span></span><a class="headerlink" href="#c.iris_fpga" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_dsp">
+<span class="target" id="iris__runtime_8h_1a179e7dee0e64bb769f43524c4b9de675"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_dsp</span></span></span><a class="headerlink" href="#c.iris_dsp" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_cuda">
+<span class="target" id="iris__runtime_8h_1a7f0337458935d9e7b3e4734830660f48"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_cuda</span></span></span><a class="headerlink" href="#c.iris_cuda" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_hexagon">
+<span class="target" id="iris__runtime_8h_1a2ba3524037319e4dad9303c46a47b378"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_hexagon</span></span></span><a class="headerlink" href="#c.iris_hexagon" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_hip">
+<span class="target" id="iris__runtime_8h_1a437bb8cb2c340e595c151c1d4e1470e6"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_hip</span></span></span><a class="headerlink" href="#c.iris_hip" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_levelzero">
+<span class="target" id="iris__runtime_8h_1a8929fe36af634dee147ba4ab9faccb10"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_levelzero</span></span></span><a class="headerlink" href="#c.iris_levelzero" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_opencl">
+<span class="target" id="iris__runtime_8h_1a2f4dd20ef38d476b1c468dca4bfaeac7"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_opencl</span></span></span><a class="headerlink" href="#c.iris_opencl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_openmp">
+<span class="target" id="iris__runtime_8h_1a77dea55d28f835e118da466070398fea"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_openmp</span></span></span><a class="headerlink" href="#c.iris_openmp" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_roundrobin">
+<span class="target" id="iris__runtime_8h_1a4e87e75211d9c0f375199b775023800b"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_roundrobin</span></span></span><a class="headerlink" href="#c.iris_roundrobin" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_locality">
+<span class="target" id="iris__runtime_8h_1a487e89539ed2c43cace38509fa1d8cf5"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_locality</span></span></span><a class="headerlink" href="#c.iris_locality" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_random">
+<span class="target" id="iris__runtime_8h_1a0d26d5a1826a848f667663a9772f6de3"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_random</span></span></span><a class="headerlink" href="#c.iris_random" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_custom">
+<span class="target" id="iris__runtime_8h_1a01fb38a6ab3962fe5ae9eb0b855afec8"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_custom</span></span></span><a class="headerlink" href="#c.iris_custom" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_r">
+<span class="target" id="iris__runtime_8h_1a010483c854538c41bb174423fa9393a0"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_r</span></span></span><a class="headerlink" href="#c.iris_r" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_w">
+<span class="target" id="iris__runtime_8h_1aca8ff8b33e2aaf13abde90bd10a815ae"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_w</span></span></span><a class="headerlink" href="#c.iris_w" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_rw">
+<span class="target" id="iris__runtime_8h_1a52c82440d9087bc90901248aa191c0dc"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_rw</span></span></span><a class="headerlink" href="#c.iris_rw" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_int8">
+<span class="target" id="iris__runtime_8h_1a1f95d775640762b1a8951c7e72f53f90"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_int8</span></span></span><a class="headerlink" href="#c.iris_int8" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_int16">
+<span class="target" id="iris__runtime_8h_1a7b2da8d6540621c50844d2124b6c6190"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_int16</span></span></span><a class="headerlink" href="#c.iris_int16" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_int32">
+<span class="target" id="iris__runtime_8h_1a062ce47429f5e61c0576e7c205fe2135"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_int32</span></span></span><a class="headerlink" href="#c.iris_int32" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_int64">
+<span class="target" id="iris__runtime_8h_1a64b15541c43c28a9fe129083bf90e26a"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_int64</span></span></span><a class="headerlink" href="#c.iris_int64" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_float">
+<span class="target" id="iris__runtime_8h_1a72139fe707cd00015e28cb282d089c86"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_float</span></span></span><a class="headerlink" href="#c.iris_float" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_double">
+<span class="target" id="iris__runtime_8h_1ab54979e4acf11ca570108dce38b4717e"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_double</span></span></span><a class="headerlink" href="#c.iris_double" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_info_platform">
+<span class="target" id="iris__runtime_8h_1a95bfeb132bca8a198b9c0ceea6a7a354"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_info_platform</span></span></span><a class="headerlink" href="#c.iris_info_platform" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_info_vendor">
+<span class="target" id="iris__runtime_8h_1a0ed367093b9822afc2018a550c60bc0e"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_info_vendor</span></span></span><a class="headerlink" href="#c.iris_info_vendor" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_info_name">
+<span class="target" id="iris__runtime_8h_1a633e76f768364de768815bc8a5b6892e"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_info_name</span></span></span><a class="headerlink" href="#c.iris_info_name" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.iris_info_type">
+<span class="target" id="iris__runtime_8h_1a361e22f3554d829d831a795f27a035d1"></span><span class="sig-name descname"><span class="n"><span class="pre">iris_info_type</span></span></span><a class="headerlink" href="#c.iris_info_type" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv411iris_kernel">
+<span id="_CPPv311iris_kernel"></span><span id="_CPPv211iris_kernel"></span><span id="iris_kernel"></span><span class="target" id="iris__runtime_8h_1ac6ea036feaa3c7efafd97a501570adca"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">_iris_kernel</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">iris_kernel</span></span></span><a class="headerlink" href="#_CPPv411iris_kernel" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv48iris_mem">
+<span id="_CPPv38iris_mem"></span><span id="_CPPv28iris_mem"></span><span id="iris_mem"></span><span class="target" id="iris__runtime_8h_1aa63c8801d213f312b2b32e88b2655624"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">_iris_mem</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">iris_mem</span></span></span><a class="headerlink" href="#_CPPv48iris_mem" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv49iris_task">
+<span id="_CPPv39iris_task"></span><span id="_CPPv29iris_task"></span><span id="iris_task"></span><span class="target" id="iris__runtime_8h_1a80046de18521148abe113d1ca472b504"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">_iris_task</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">iris_task</span></span></span><a class="headerlink" href="#_CPPv49iris_task" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv49iris_initPiPPPci">
+<span id="_CPPv39iris_initPiPPPci"></span><span id="_CPPv29iris_initPiPPPci"></span><span id="iris_init__iP.cPPP.i"></span><span class="target" id="iris__runtime_8h_1a394cd0ae01d48432d615b0fffdcd579e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_init</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sync</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv49iris_initPiPPPci" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Initializes the IRIS execution environment. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>argc</strong> – pointer to the number of arguments </p></li>
+<li><p><strong>argv</strong> – argument vector </p></li>
+<li><p><strong>sync</strong> – 0: non-blocking, 1: blocking </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>All IRIS functions return an error value (IRIS_SUCCESS or IRIS_ERR) </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv413iris_finalizev">
+<span id="_CPPv313iris_finalizev"></span><span id="_CPPv213iris_finalizev"></span><span id="iris_finalize"></span><span class="target" id="iris__runtime_8h_1a7af0f197910eec440923e29ed7cfc4f5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_finalize</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413iris_finalizev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Terminates the IRIS execution environment. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416iris_synchronizev">
+<span id="_CPPv316iris_synchronizev"></span><span id="_CPPv216iris_synchronizev"></span><span id="iris_synchronize"></span><span class="target" id="iris__runtime_8h_1a333b9610839edadbec2882edc425ebdf"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_synchronize</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416iris_synchronizev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Waits for all the submitted tasks to complete. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412iris_env_setPKcPKc">
+<span id="_CPPv312iris_env_setPKcPKc"></span><span id="_CPPv212iris_env_setPKcPKc"></span><span id="iris_env_set__cCP.cCP"></span><span class="target" id="iris__runtime_8h_1a0a7eb084e1c7f8b780af8c479856b37f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_env_set</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412iris_env_setPKcPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412iris_env_getPKcPPcP6size_t">
+<span id="_CPPv312iris_env_getPKcPPcP6size_t"></span><span id="_CPPv212iris_env_getPKcPPcP6size_t"></span><span id="iris_env_get__cCP.cPP.sP"></span><span class="target" id="iris__runtime_8h_1af4709aa3b1e2cef138b7a6681f0ed46f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_env_get</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">vallen</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412iris_env_getPKcPPcP6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419iris_platform_countPi">
+<span id="_CPPv319iris_platform_countPi"></span><span id="_CPPv219iris_platform_countPi"></span><span id="iris_platform_count__iP"></span><span class="target" id="iris__runtime_8h_1a0c73fdad36e3eada90e1ba7ae289badf"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_platform_count</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">nplatforms</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419iris_platform_countPi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418iris_platform_infoiiPvP6size_t">
+<span id="_CPPv318iris_platform_infoiiPvP6size_t"></span><span id="_CPPv218iris_platform_infoiiPvP6size_t"></span><span id="iris_platform_info__i.i.voidP.sP"></span><span class="target" id="iris__runtime_8h_1a0e426bba8a5f05bab32e96d44ad35c20"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_platform_info</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">platform</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">param</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418iris_platform_infoiiPvP6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427iris_platform_build_programiPc">
+<span id="_CPPv327iris_platform_build_programiPc"></span><span id="_CPPv227iris_platform_build_programiPc"></span><span id="iris_platform_build_program__i.cP"></span><span class="target" id="iris__runtime_8h_1a9f5c9780ed50873836598f5b12b5ba6a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_platform_build_program</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">model</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427iris_platform_build_programiPc" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417iris_device_countPi">
+<span id="_CPPv317iris_device_countPi"></span><span id="_CPPv217iris_device_countPi"></span><span id="iris_device_count__iP"></span><span class="target" id="iris__runtime_8h_1a3a98e5b163b74979363b65fa24de0ef0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_device_count</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ndevs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417iris_device_countPi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416iris_device_infoiiPvP6size_t">
+<span id="_CPPv316iris_device_infoiiPvP6size_t"></span><span id="_CPPv216iris_device_infoiiPvP6size_t"></span><span id="iris_device_info__i.i.voidP.sP"></span><span class="target" id="iris__runtime_8h_1a3b700aec5d0ec3959f29da86e314a974"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_device_info</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">device</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">param</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416iris_device_infoiiPvP6size_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423iris_device_synchronizeiPi">
+<span id="_CPPv323iris_device_synchronizeiPi"></span><span id="_CPPv223iris_device_synchronizeiPi"></span><span id="iris_device_synchronize__i.iP"></span><span class="target" id="iris__runtime_8h_1a2ba4d948c0e5be2869d476afe6f5d1af"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_device_synchronize</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ndevs</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">devices</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423iris_device_synchronizeiPi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420iris_register_policyPKcPKcPv">
+<span id="_CPPv320iris_register_policyPKcPKcPv"></span><span id="_CPPv220iris_register_policyPKcPKcPv"></span><span id="iris_register_policy__cCP.cCP.voidP"></span><span class="target" id="iris__runtime_8h_1a7a1b51c8ab2d2aabcb3140186b20e7de"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_register_policy</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">lib</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">name</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">params</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420iris_register_policyPKcPKcPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415iris_mem_create6size_tP8iris_mem">
+<span id="_CPPv315iris_mem_create6size_tP8iris_mem"></span><span id="_CPPv215iris_mem_create6size_tP8iris_mem"></span><span id="iris_mem_create__s.iris_memP"></span><span class="target" id="iris__runtime_8h_1a28df0d57a77fbbb45f540a85010cd71e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_mem_create</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span>, <a class="reference internal" href="#_CPPv48iris_mem" title="iris_mem"><span class="n"><span class="pre">iris_mem</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mem</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415iris_mem_create6size_tP8iris_mem" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416iris_mem_release8iris_mem">
+<span id="_CPPv316iris_mem_release8iris_mem"></span><span id="_CPPv216iris_mem_release8iris_mem"></span><span id="iris_mem_release__iris_mem"></span><span class="target" id="iris__runtime_8h_1a0e537b116125aa751d4491ecbfbd96a3"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_mem_release</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48iris_mem" title="iris_mem"><span class="n"><span class="pre">iris_mem</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mem</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416iris_mem_release8iris_mem" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416iris_task_createP9iris_task">
+<span id="_CPPv316iris_task_createP9iris_task"></span><span id="_CPPv216iris_task_createP9iris_task"></span><span id="iris_task_create__iris_taskP"></span><span class="target" id="iris__runtime_8h_1ac43586ca44ca79dc5a09ed97ba2b710b"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_task_create</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">task</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416iris_task_createP9iris_task" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416iris_task_depend9iris_taskiP9iris_task">
+<span id="_CPPv316iris_task_depend9iris_taskiP9iris_task"></span><span id="_CPPv216iris_task_depend9iris_taskiP9iris_task"></span><span id="iris_task_depend__iris_task.i.iris_taskP"></span><span class="target" id="iris__runtime_8h_1acbf7ec5e7cec211506ef2c4e6351c633"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_task_depend</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ntasks</span></span>, <a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">tasks</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416iris_task_depend9iris_taskiP9iris_task" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv413iris_task_h2d9iris_task8iris_mem6size_t6size_tPv">
+<span id="_CPPv313iris_task_h2d9iris_task8iris_mem6size_t6size_tPv"></span><span id="_CPPv213iris_task_h2d9iris_task8iris_mem6size_t6size_tPv"></span><span id="iris_task_h2d__iris_task.iris_mem.s.s.voidP"></span><span class="target" id="iris__runtime_8h_1a5184540fd854bb4d5df434e9dfe79f12"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_task_h2d</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span>, <a class="reference internal" href="#_CPPv48iris_mem" title="iris_mem"><span class="n"><span class="pre">iris_mem</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mem</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">off</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">host</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413iris_task_h2d9iris_task8iris_mem6size_t6size_tPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv413iris_task_d2h9iris_task8iris_mem6size_t6size_tPv">
+<span id="_CPPv313iris_task_d2h9iris_task8iris_mem6size_t6size_tPv"></span><span id="_CPPv213iris_task_d2h9iris_task8iris_mem6size_t6size_tPv"></span><span id="iris_task_d2h__iris_task.iris_mem.s.s.voidP"></span><span class="target" id="iris__runtime_8h_1a2156cc25eaa9387cc7cdde79dd7f7391"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_task_d2h</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span>, <a class="reference internal" href="#_CPPv48iris_mem" title="iris_mem"><span class="n"><span class="pre">iris_mem</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mem</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">off</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">host</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413iris_task_d2h9iris_task8iris_mem6size_t6size_tPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418iris_task_h2d_full9iris_task8iris_memPv">
+<span id="_CPPv318iris_task_h2d_full9iris_task8iris_memPv"></span><span id="_CPPv218iris_task_h2d_full9iris_task8iris_memPv"></span><span id="iris_task_h2d_full__iris_task.iris_mem.voidP"></span><span class="target" id="iris__runtime_8h_1ae2018699c97c076bab24496f31fa5ef9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_task_h2d_full</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span>, <a class="reference internal" href="#_CPPv48iris_mem" title="iris_mem"><span class="n"><span class="pre">iris_mem</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mem</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">host</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418iris_task_h2d_full9iris_task8iris_memPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418iris_task_d2h_full9iris_task8iris_memPv">
+<span id="_CPPv318iris_task_d2h_full9iris_task8iris_memPv"></span><span id="_CPPv218iris_task_d2h_full9iris_task8iris_memPv"></span><span id="iris_task_d2h_full__iris_task.iris_mem.voidP"></span><span class="target" id="iris__runtime_8h_1a61df91fcfdd100b43b5430c42762eefe"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_task_d2h_full</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span>, <a class="reference internal" href="#_CPPv48iris_mem" title="iris_mem"><span class="n"><span class="pre">iris_mem</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mem</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">host</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418iris_task_d2h_full9iris_task8iris_memPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416iris_task_submit9iris_taskiPKci">
+<span id="_CPPv316iris_task_submit9iris_taskiPKci"></span><span id="_CPPv216iris_task_submit9iris_taskiPKci"></span><span id="iris_task_submit__iris_task.i.cCP.i"></span><span class="target" id="iris__runtime_8h_1a792be9e68b6566233c8959199f4f8254"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_task_submit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">device</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">opt</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sync</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416iris_task_submit9iris_taskiPKci" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414iris_task_wait9iris_task">
+<span id="_CPPv314iris_task_wait9iris_task"></span><span id="_CPPv214iris_task_wait9iris_task"></span><span id="iris_task_wait__iris_task"></span><span class="target" id="iris__runtime_8h_1a3f6657afa6d2875856e21691e85419a7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_task_wait</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414iris_task_wait9iris_task" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418iris_task_wait_alliP9iris_task">
+<span id="_CPPv318iris_task_wait_alliP9iris_task"></span><span id="_CPPv218iris_task_wait_alliP9iris_task"></span><span id="iris_task_wait_all__i.iris_taskP"></span><span class="target" id="iris__runtime_8h_1a4daabde338c62832c837f75853862616"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_task_wait_all</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">ntasks</span></span>, <a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">tasks</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418iris_task_wait_alliP9iris_task" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417iris_task_release9iris_task">
+<span id="_CPPv317iris_task_release9iris_task"></span><span id="_CPPv217iris_task_release9iris_task"></span><span id="iris_task_release__iris_task"></span><span class="target" id="iris__runtime_8h_1a37f99f72cfb5ec49faf1fceb2bebe8b0"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_task_release</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv49iris_task" title="iris_task"><span class="n"><span class="pre">iris_task</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417iris_task_release9iris_task" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414iris_timer_nowPd">
+<span id="_CPPv314iris_timer_nowPd"></span><span id="_CPPv214iris_timer_nowPd"></span><span id="iris_timer_now__doubleP"></span><span class="target" id="iris__runtime_8h_1aeb19e6846b5b464a1c419728affdeb26"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_timer_now</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">time</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414iris_timer_nowPd" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+<div class="section" id="cpp-api">
+<span id="id2"></span><h1>C++ API<a class="headerlink" href="#cpp-api" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="fortran-api">
+<span id="id3"></span><h1>Fortran API<a class="headerlink" href="#fortran-api" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="python-api">
+<span id="id4"></span><h1>Python API<a class="headerlink" href="#python-api" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="misc.html" class="btn btn-neutral float-right" title="Citation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="architecture.html" class="btn btn-neutral float-left" title="Platform Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Oak Ridge National Laboratory.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
