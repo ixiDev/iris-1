@@ -118,6 +118,9 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="misc.html">Citation</a></li>
 </ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Keyword Index</a></li>
+</ul>
 
             
           
@@ -210,7 +213,7 @@
 </div>
 <div class="section" id="task">
 <span id="index-5"></span><span id="id1"></span><h1>Task<a class="headerlink" href="#task" title="Permalink to this headline">¶</a></h1>
-<p>An IRIS task contains zero or more commands. There are three types of commands: (1) host-to-device memory copy command, (2) device-to-host memory copy command, and (3) kernel launch command. The commands in a task are executed in a single compute device in a FIFO execution order. A task can have a dependency on other tasks. When a task depends on other tasks, it cannot start until the prerequisite tasks complete.</p>
+<p>IRIS provides task-based programming and execution models. A task is portable across all the available programming platforms and can be run on any accelerator in the system. A task contains zero or more commands. There are three types of commands: (1) host-to-device memory copy command, (2) device-to-host memory copy command, and (3) kernel launch command. The commands in a task are executed in a single compute device in a FIFO execution order. A task can have a dependency on other tasks. When a task depends on other tasks, it cannot start until the prerequisite tasks complete.</p>
 <div class="figure align-center" id="id3">
 <a class="reference internal image-reference" href="_images/task.png"><img alt="_images/task.png" src="_images/task.png" style="width: 100%;" /></a>
 <p class="caption"><span class="caption-text">IRIS task lifecycle and state diagram</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
