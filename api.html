@@ -42,8 +42,6 @@
               <p class="caption" role="heading"><span class="caption-text">Installation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Build from Source</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html#docker">Docker</a></li>
-<li class="toctree-l1"><a class="reference internal" href="installation.html#pypi">PyPI</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
@@ -100,11 +98,6 @@
 <span id="id1"></span><h1>C API<a class="headerlink" href="#c-api" title="Permalink to this headline"></a></h1>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
-<dl class="cpp type">
-<dt class="sig sig-object cpp" id="_CPPv411iris_kernel">
-<span id="_CPPv311iris_kernel"></span><span id="_CPPv211iris_kernel"></span><span id="iris_kernel"></span><span class="target" id="iris__runtime_8h_1ac6ea036feaa3c7efafd97a501570adca"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">_iris_kernel</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">iris_kernel</span></span></span><a class="headerlink" href="#_CPPv411iris_kernel" title="Permalink to this definition"></a><br /></dt>
-<dd></dd></dl>
-
 <dl class="cpp type">
 <dt class="sig sig-object cpp" id="_CPPv48iris_mem">
 <span id="_CPPv38iris_mem"></span><span id="_CPPv28iris_mem"></span><span id="iris_mem"></span><span class="target" id="iris__runtime_8h_1aa63c8801d213f312b2b32e88b2655624"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">_iris_mem</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">iris_mem</span></span></span><a class="headerlink" href="#_CPPv48iris_mem" title="Permalink to this definition"></a><br /></dt>
@@ -465,7 +458,7 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv414iris_timer_nowPd">
 <span id="_CPPv314iris_timer_nowPd"></span><span id="_CPPv214iris_timer_nowPd"></span><span id="iris_timer_now__doubleP"></span><span class="target" id="iris__runtime_8h_1aeb19e6846b5b464a1c419728affdeb26"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">iris_timer_now</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">time</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414iris_timer_nowPd" title="Permalink to this definition"></a><br /></dt>
-<dd><p>Returns time in seconds now. </p>
+<dd><p>Returns current time in seconds. </p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>time</strong> – pointer of time </p>
